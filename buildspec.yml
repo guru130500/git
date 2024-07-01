@@ -1,0 +1,45 @@
+version: 0.2
+
+env:
+  variables:
+   
+   
+phases:
+  install:
+    commands:
+      - echo Installing  terraform...
+      - sudo yum install -y yum-utils shadow-utils
+      - sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+      - sudo yum -y install terraform
+
+  pre_build:
+    commands:
+      - echo entering into pre build phase...
+      - terraform --version
+      - terraform init
+      - terraform validate
+
+  build:
+    commands:
+    - terraform apply --auto-approve
+
+  post_build:
+    commands:
+      - terraform destroy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
